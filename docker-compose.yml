@@ -1,0 +1,30 @@
+version: '3'
+
+services: 
+
+  nextcloud:
+    image: nathanstrobbe/nextcloud:storj-integration
+    restart: always
+    container_name: nextcloud
+    env_file: .env
+    environment: 
+      - MYSQL_HOST=database
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - NEXTCLOUD_ADMIN_USER
+      - NEXTCLOUD_ADMIN_PASSWORD
+
+  database:
+    image: mariadb
+    restart: always
+    container_name: nextcloud-database
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+
+volumes:
+  database:
