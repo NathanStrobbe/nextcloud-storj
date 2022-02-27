@@ -1,6 +1,7 @@
 FROM nextcloud:23
 
 COPY php.ini /usr/local/etc/php/php.ini
+COPY apache2.conf /etc/apache2/sites-available/000-default.conf
 
 RUN apt-get update \
     && apt-get install -y libffi-dev \
